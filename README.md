@@ -32,11 +32,11 @@ This search program allows user to perform various queries on the available **mo
 ### Installation	
     1. Install Maven on machine.(https://maven.apache.org/install.html)
     2. Open terminal or command prompt and go to the project source directory.
-    3. Run the command : "mvn clean install", this will generate a WAR file of the project and download the dependencies of the project.
+    3. Run the command : "mvn clean install", this will generate a WAR file of the project under "target" folder and also download the dependencies of the project.
     4. Install an application server(Glassfish is used for testing this project)(https://glassfish.java.net/docs/4.0/installation-guide.pdf)
     5. On Glassfish server, create a domain if not already created (if installed with default configurations, skip this step as a default domain "domain1" is created while installing).
-    6. Deploy the application on server under Applications sub menu. (Glassfish Admin Console can be found at "http://localhost:4848" to do complete this step)
-    7. Change the context Path of the application to "/FlickHunter" while deploying the application.
+    6. Deploy the application WAR on server under Applications sub menu. (Glassfish Admin Console can be found at "http://localhost:4848" to do complete this step)
+    7. Change the context Path of the application to "/FlickHunter" while deploying the application. The Deployment process will take a few minutes, please be patient.
     8. Once deployed correctly, the application can be accessed at :"http://localhost:8080/FlickHunter/index.html" (Default port for Glassfish deployments is 8080)
     9. Use the text box to search for the movies and look at the ranked results.
 
