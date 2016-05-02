@@ -39,8 +39,7 @@ public class VectorSpace {
 	// constructor
 	public VectorSpace() {
 		System.out.println("Constructor for MovieBean!!!");
-		String inputFilePath = Thread.currentThread().getContextClassLoader().getResource("/movies.json")
-				.getPath();
+		String inputFilePath = Thread.currentThread().getContextClassLoader().getResource("/movies.json").getPath();
 
 		// read all the document into buffers
 		File input = new File(inputFilePath);
@@ -60,7 +59,7 @@ public class VectorSpace {
 		stopWords = readStopWords(stopWordPath);
 		termList = new ArrayList<String>();
 
-		List<Movie> movieList = movies.getMovies();//.subList(0, 10000);
+		List<Movie> movieList = movies.getMovies();//.subList(0, 1000);
 		moviesMap = new HashMap<String, Movie>();
 
 		docLists = new ArrayList<ArrayList<Document>>();
@@ -68,9 +67,46 @@ public class VectorSpace {
 
 		for (Movie movie : movieList) {
 			moviesMap.put(movie.getId(), movie);
+			
 			String regex = "\\W+";
-			String[] words = movie.toString().toLowerCase().split(regex);
-			String word;
+			String titleArray[] = movie.getTitle().toLowerCase().split(regex);
+			for (int j = 0; j < titleArray.length; j++) {
+				calculateWeight(titleArray[j],movie.getId(),10);
+			}
+			String plotArray[] = movie.getPlot().toLowerCase().split(regex);
+			for (int j = 0; j < plotArray.length; j++) {
+				calculateWeight(plotArray[j],movie.getId(),1);
+			}
+			String keywordArray[] = movie.getKeywords().toString().toLowerCase().split(regex);
+			for (int j = 0; j < keywordArray.length; j++) {
+				calculateWeight(keywordArray[j],movie.getId(),5);
+			}
+			String gerneArray[] = movie.getGenre().toString().toLowerCase().split(regex);
+			for (int j = 0; j < gerneArray.length; j++) {
+				calculateWeight(gerneArray[j],movie.getId(),8);
+			}
+			String actorsArray[] = movie.getActors().toString().toLowerCase().split(regex);
+			for (int j = 0; j < actorsArray.length; j++) {
+				calculateWeight(actorsArray[j],movie.getId(),6);
+			}
+			String actressArray[] = movie.getActoress().toString().toLowerCase().split(regex);
+			for (int j = 0; j < actressArray.length; j++) {
+				calculateWeight(actressArray[j],movie.getId(),6);
+			}
+			String directorArray[] = movie.getDirectors().toString().toLowerCase().split(regex);
+			for (int j = 0; j < directorArray.length; j++) {
+				calculateWeight(directorArray[j],movie.getId(),7);
+			}
+			String producersArray[] = movie.getProducers().toString().toLowerCase().split(regex);
+			for (int j = 0; j < producersArray.length; j++) {
+				calculateWeight(producersArray[j],movie.getId(),7);
+			}
+			
+			
+			
+			//String regex = "\\W+";
+			//String[] words = movie.toString().toLowerCase().split(regex);
+			/*String word;
 
 			for (int j = 0; j < words.length; j++) {
 				boolean match = false;
@@ -107,7 +143,7 @@ public class VectorSpace {
 						}
 					}
 				}
-			}
+			}*/
 		}
 
 		// compute the tf.idf
@@ -125,6 +161,45 @@ public class VectorSpace {
 		}
 		System.gc();
 		System.out.println("Vector space model created!!!");
+	}
+
+	public void calculateWeight(String word, String movieId, int tw) {
+		ArrayList<Document> docList;
+
+		boolean match = false;
+		// stem the word
+		Stemmer st = new Stemmer();
+		st.add(word.toCharArray(), word.length());
+		st.stem();
+		word = st.toString();
+
+		// search for stop words
+		if (searchStopWord(word, stopWords) == -1) {
+
+			if (!termList.contains(word)) {
+				termList.add(word);
+				docList = new ArrayList<Document>();
+				Document doc = new Document(Integer.valueOf(movieId), tw);
+				docList.add(doc);
+				docLists.add(docList);
+			} else {
+				int index = termList.indexOf(word);
+				docList = docLists.get(index);
+
+				for (Document did : docList) {
+					if (did.docId == Integer.valueOf(movieId)) {
+						did.tw++;
+						match = true;
+						break;
+					}
+				}
+				if (!match) {
+					Document doc = new Document(Integer.valueOf(movieId), tw);
+					docList.add(doc);
+				}
+			}
+		}
+
 	}
 
 	/**

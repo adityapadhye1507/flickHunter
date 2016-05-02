@@ -150,6 +150,10 @@ public class Movie {
 		content.append(" ");
 		content.append(this.plot);
 		content.append(" ");
+		content.append(this.keywords);
+		content.append(" ");
+		content.append(this.genre);
+		content.append(" ");
 		content.append(this.actors);
 		content.append(" ");
 		content.append(this.actoress);
@@ -160,6 +164,7 @@ public class Movie {
 		return content.toString();
 	}
 
+	
 	/*public List<String> getBiWords() {
 		List<String> biWords = new ArrayList<String>();
 		biWords.addAll(getNames(this.actors));
