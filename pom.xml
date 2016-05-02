@@ -56,8 +56,10 @@
 				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+                    <warName>FlickHunter</warName>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	<version>1.0</version>
 </project>
