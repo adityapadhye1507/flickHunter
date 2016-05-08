@@ -30,7 +30,7 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value = "/get/{movieId}", method = RequestMethod.GET, produces = "application/json")
-	public Movie sayHello(@PathVariable String movieId){
+	public Movie getMovie(@PathVariable String movieId){
 		return searchService.getMovie(movieId);
 	}
 }

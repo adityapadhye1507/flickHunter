@@ -1,0 +1,11 @@
+com/flickhunter/beans/VectorSpace.class
+com/flickhunter/helper/Stemmer.class
+com/flickhunter/helper/SearchHelper.class
+com/flickhunter/web/service/SearchService.class
+com/flickhunter/web/filter/SimpleFilter.class
+com/flickhunter/model/Movie.class
+com/flickhunter/web/controller/SearchController.class
+com/flickhunter/web/service/impl/SearchServiceImpl.class
+com/flickhunter/model/Document.class
+com/flickhunter/model/Movies.class
+com/flickhunter/helper/SearchHelper$1.class
