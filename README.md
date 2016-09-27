@@ -1,5 +1,8 @@
 ###FLICK-HUNTER PROJECT  
 
+###Demo URL
+http://flickhunter.herokuapp.com
+
 ###Introduction
 This search program allows user to perform various queries on the available **movie data collection**.   
 
